@@ -402,7 +402,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>${version.war.plugin}</version>
                 <configuration>
-                    <warName>${project.artifactId}</warName>
+                    <warName>petclinic</warName>
                 </configuration>
             </plugin>
             <plugin>
@@ -448,6 +448,11 @@
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>${version.wildfly.maven.plugin}</version>
+                <configuration>
+                    <hostname>localhost</hostname>
+                    <port>9990</port>
+                    <filename>petclinic.war</filename>
+                </configuration>
             </plugin>
         </plugins>
     </build>
