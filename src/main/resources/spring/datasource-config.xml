@@ -54,10 +54,12 @@
     <!-- As an alternative, for embedded databases see <jdbc:embedded-database/>. -->
     <!-- For tests (HSQLDB): Initializes the database schema and data. -->
     <!-- For production (PostgreSQL): Database is expected to be pre-initialized. -->
+    <!--
     <jdbc:initialize-database data-source="dataSource" ignore-failures="DROPS">
         <jdbc:script location="${jdbc.initLocation}"/>
         <jdbc:script location="${jdbc.dataLocation}"/>
     </jdbc:initialize-database>
+    -->
 
     <beans profile="javaee">
         <!-- JNDI DataSource for JEE environments -->
