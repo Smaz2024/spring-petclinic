@@ -65,3 +65,11 @@ INSERT INTO visits (id, pet_id, visit_date, description) VALUES
 (3,8,'2009-06-04','neutered'),
 (4,7,'2008-09-04','spayed')
 ON CONFLICT DO NOTHING;
+
+-- Reset sequences to sync with max id values to avoid duplicate key violations
+SELECT setval('vets_id_seq', (SELECT MAX(id) FROM vets));
+SELECT setval('specialties_id_seq', (SELECT MAX(id) FROM specialties));
+SELECT setval('types_id_seq', (SELECT MAX(id) FROM types));
+SELECT setval('owners_id_seq', (SELECT MAX(id) FROM owners));
+SELECT setval('pets_id_seq', (SELECT MAX(id) FROM pets));
+SELECT setval('visits_id_seq', (SELECT MAX(id) FROM visits));
