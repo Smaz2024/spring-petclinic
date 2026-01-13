@@ -68,9 +68,10 @@ INSERT INTO visits (id, pet_id, visit_date, description) VALUES
 ON CONFLICT DO NOTHING;
 
 -- Reset sequences to sync with max id values to avoid duplicate key violations
-SELECT setval('vets_id_seq', (SELECT MAX(id) FROM vets));
-SELECT setval('specialties_id_seq', (SELECT MAX(id) FROM specialties));
-SELECT setval('types_id_seq', (SELECT MAX(id) FROM types));
-SELECT setval('owners_id_seq', (SELECT MAX(id) FROM owners));
-SELECT setval('pets_id_seq', (SELECT MAX(id) FROM pets));
-SELECT setval('visits_id_seq', (SELECT MAX(id) FROM visits));
+SELECT setval('vets_id_seq', (SELECT MAX(id) FROM vets), true);
+SELECT setval('specialties_id_seq', (SELECT MAX(id) FROM specialties), true);
+SELECT setval('types_id_seq', (SELECT MAX(id) FROM types), true);
+SELECT setval('owners_id_seq', (SELECT MAX(id) FROM owners), true);
+SELECT setval('pets_id_seq', (SELECT MAX(id) FROM pets), true);
+SELECT setval('visits_id_seq', (SELECT MAX(id) FROM visits), true);
+
