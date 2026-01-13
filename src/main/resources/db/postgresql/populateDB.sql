@@ -1,83 +1,76 @@
--- =====================================================
--- Sample Data (Optional - comment out if not needed)
--- =====================================================
 
--- Insert pet types
-INSERT INTO types (name) VALUES 
-  ('cat'),
-  ('dog'),
-  ('lizard'),
-  ('snake'),
-  ('bird'),
-  ('hamster');
+INSERT INTO vets (id, first_name, last_name) VALUES
+(1,'James','Carter'),
+(2,'Helen','Leary'),
+(3,'Linda','Douglas'),
+(4,'Rafael','Ortega'),
+(5,'Henry','Stevens'),
+(6,'Sharon','Jenkins')
+ON CONFLICT DO NOTHING;
 
--- Insert specialties
-INSERT INTO specialties (name) VALUES
-  ('radiology'),
-  ('surgery'),
-  ('dentistry');
+INSERT INTO specialties (id, name) VALUES
+(1,'radiology'),
+(2,'surgery'),
+(3,'dentistry')
+ON CONFLICT DO NOTHING;
 
--- Insert vets
-INSERT INTO vets (first_name, last_name) VALUES
-  ('James', 'Carter'),
-  ('Helen', 'Leary'),
-  ('Linda', 'Douglas'),
-  ('Rafael', 'Ortega'),
-  ('Henry', 'Stevens'),
-  ('Sharon', 'Jenkins');
-
--- Assign specialties to vets
 INSERT INTO vet_specialties (vet_id, specialty_id) VALUES
-  (2, 1), -- Helen Leary - radiology
-  (3, 2), -- Linda Douglas - surgery  
-  (3, 3), -- Linda Douglas - dentistry
-  (4, 2), -- Rafael Ortega - surgery
-  (5, 1); -- Henry Stevens - radiology
+(2,1),
+(3,2),
+(3,3),
+(4,2),
+(5,1)
+ON CONFLICT DO NOTHING;
 
--- Insert owners
-INSERT INTO owners (first_name, last_name, address, city, telephone) VALUES
-  ('George', 'Franklin', '110 W. Liberty St.', 'Madison', '6085551023'),
-  ('Betty', 'Davis', '638 Cardinal Ave.', 'Sun Prairie', '6085551749'),
-  ('Eduardo', 'Rodriquez', '2693 Commerce St.', 'McFarland', '6085558763'),
-  ('Harold', 'Davis', '563 Friendly St.', 'Windsor', '6085553198'),
-  ('Peter', 'McTavish', '2387 S. Fair Way', 'Madison', '6085552765'),
-  ('Jean', 'Coleman', '105 N. Lake St.', 'Monona', '6085552654'),
-  ('Jeff', 'Black', '1450 Oak Blvd.', 'Monona', '6085555387'),
-  ('Maria', 'Escobito', '345 Maple St.', 'Madison', '6085557683'),
-  ('David', 'Schroeder', '2749 Blackhawk Trail', 'Madison', '6085559435'),
-  ('Carlos', 'Estaban', '2335 Independence La.', 'Waunakee', '6085555487');
+INSERT INTO types (id, name) VALUES
+(1,'cat'),
+(2,'dog'),
+(3,'lizard'),
+(4,'snake'),
+(5,'bird'),
+(6,'hamster')
+ON CONFLICT DO NOTHING;
 
--- Insert pets
-INSERT INTO pets (name, birth_date, type_id, owner_id) VALUES
-  ('Leo', '2010-09-07', 1, 1),
-  ('Basil', '2012-08-06', 6, 2),
-  ('Rosy', '2011-04-17', 2, 3),
-  ('Jewel', '2010-03-07', 2, 3),
-  ('Iggy', '2010-11-30', 3, 4),
-  ('George', '2010-01-20', 4, 5),
-  ('Samantha', '2012-09-04', 1, 6),
-  ('Max', '2012-09-04', 1, 6),
-  ('Lucky', '2011-08-06', 5, 7),
-  ('Mulligan', '2007-02-24', 2, 8),
-  ('Freddy', '2010-03-09', 5, 9),
-  ('Lucky', '2010-06-24', 2, 10),
-  ('Sly', '2012-06-08', 1, 10);
+INSERT INTO owners (id, first_name, last_name, address, city, telephone) VALUES
+(1,'George','Franklin','110 W. Liberty St.','Madison','6085551023'),
+(2,'Betty','Davis','638 Cardinal Ave.','Sun Prairie','6085551749'),
+(3,'Eduardo','Rodriquez','2693 Commerce St.','McFarland','6085558763'),
+(4,'Harold','Davis','563 Friendly St.','Windsor','6085553198'),
+(5,'Peter','McTavish','2387 S. Fair Way','Madison','6085552765'),
+(6,'Jean','Coleman','105 N. Lake St.','Monona','6085552654'),
+(7,'Jeff','Black','1450 Oak Blvd.','Monona','6085555387'),
+(8,'Maria','Escobito','345 Maple St.','Madison','6085557683'),
+(9,'David','Schroeder','2749 Blackhawk Trail','Madison','6085559435'),
+(10,'Carlos','Estaban','2335 Independence La.','Waunakee','6085555487')
+ON CONFLICT DO NOTHING;
 
--- Insert visits
-INSERT INTO visits (pet_id, visit_date, description) VALUES
-  (7, '2013-01-01', 'rabies shot'),
-  (8, '2013-01-02', 'rabies shot'),
-  (8, '2013-01-03', 'neutered'),
-  (7, '2013-01-04', 'spayed');
+INSERT INTO pets (id, name, birth_date, type_id, owner_id) VALUES
+(1,'Leo','2000-09-07',1,1),
+(2,'Basil','2002-08-06',6,2),
+(3,'Rosy','2001-04-17',2,3),
+(4,'Jewel','2000-03-07',2,3),
+(5,'Iggy','2000-11-30',3,4),
+(6,'George','2000-01-20',4,5),
+(7,'Samantha','1995-09-04',1,6),
+(8,'Max','1995-09-04',1,6),
+(9,'Lucky','1999-08-06',5,7),
+(10,'Mulligan','1997-02-24',2,8),
+(11,'Freddy','2000-03-09',5,9),
+(12,'Lucky','2000-06-24',2,10),
+(13,'Sly','2002-06-08',1,10)
+ON CONFLICT DO NOTHING;
 
--- =====================================================
--- Verification Query
--- =====================================================
--- Run this to verify everything works:
--- SELECT 'Vets' as table_name, COUNT(*) as count FROM vets
--- UNION ALL
--- SELECT 'Owners', COUNT(*) FROM owners
--- UNION ALL
--- SELECT 'Pets', COUNT(*) FROM pets
--- UNION ALL
--- SELECT 'Visits', COUNT(*) FROM visits;
+INSERT INTO visits (id, pet_id, visit_date, description) VALUES
+(1,7,'2010-03-04','rabies shot'),
+(2,8,'2011-03-04','rabies shot'),
+(3,8,'2009-06-04','neutered'),
+(4,7,'2008-09-04','spayed')
+ON CONFLICT DO NOTHING;
+
+-- Reset sequences to sync with max id values to avoid duplicate key violations
+SELECT setval('vets_id_seq', (SELECT MAX(id) FROM vets));
+SELECT setval('specialties_id_seq', (SELECT MAX(id) FROM specialties));
+SELECT setval('types_id_seq', (SELECT MAX(id) FROM types));
+SELECT setval('owners_id_seq', (SELECT MAX(id) FROM owners));
+SELECT setval('pets_id_seq', (SELECT MAX(id) FROM pets));
+SELECT setval('visits_id_seq', (SELECT MAX(id) FROM visits));
