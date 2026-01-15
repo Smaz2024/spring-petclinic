@@ -203,6 +203,17 @@ commands to pull them into your local repository. The IDE should then detect the
 
 ---
 
+## Health Check Endpoints
+
+The application provides two health check endpoints:
+
+- **`GET /jboss-spring-petclinic/health`** - Returns JSON with application status (200 on success, 500 on failure)
+- **`GET /jboss-spring-petclinic/healthz`** - Returns plain text "OK" (200 on success, 500 on failure)
+
+Both endpoints verify database connectivity and can be used for monitoring.
+
+---
+
 ## Troubleshooting Deployment Issues
 
 ### MySQL Configuration Issues
